@@ -1,0 +1,126 @@
+﻿<Page x:Class="CW_hammer.Pages.EditAnimalPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Редагування">
+
+    <Grid Background="{DynamicResource BackgroundBrush}" Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220"/>
+            <ColumnDefinition Width="8"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- ЛІВО: ФОТО + ІНФО -->
+        <Border Grid.Column="0"
+                BorderBrush="{DynamicResource AccentBrush}"
+                BorderThickness="1" CornerRadius="6"
+                Background="{DynamicResource SurfaceBrush}"
+                Padding="10">
+            <StackPanel>
+                <Border Height="180" Margin="0,0,0,10"
+                        BorderBrush="{DynamicResource AccentBrush}"
+                        BorderThickness="1" CornerRadius="4">
+                    <Grid>
+                        <Image x:Name="AnimalPhoto"
+                               Stretch="Uniform" Margin="4"/>
+                        <TextBlock x:Name="AnimalNoPhoto"
+                                   Text="Фото відсутнє"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Opacity="0.4" FontSize="12"/>
+                    </Grid>
+                </Border>
+
+                <TextBlock x:Name="AnimalNameLabel"
+                           FontSize="15" FontWeight="Bold"
+                           Foreground="{DynamicResource TextBrush}"
+                           Margin="0,0,0,4"/>
+                <TextBlock x:Name="AnimalOwnerLabel"
+                           Opacity="0.6" FontSize="12"
+                           Foreground="{DynamicResource TextBrush}"/>
+
+                <Separator Margin="0,10"/>
+
+                <Button Content="💾 Зберегти"
+                        Style="{DynamicResource AppButton}"
+                        Margin="0,0,0,6"
+                        Click="Save_Click"/>
+                <Button Content="✕ Відмінити"
+                        Style="{DynamicResource AppButton}"
+                        Click="Cancel_Click"/>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Column="1"
+                Background="{DynamicResource AccentBrush}"
+                Opacity="0.2"/>
+
+        <!-- ПРАВО: ФОРМА -->
+        <Border Grid.Column="2"
+                BorderBrush="{DynamicResource AccentBrush}"
+                BorderThickness="1" CornerRadius="6"
+                Background="{DynamicResource SurfaceBrush}"
+                Padding="16">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+
+                    <TextBlock Text="Дані тварини"
+                               FontSize="16" FontWeight="Bold"
+                               Foreground="{DynamicResource TextBrush}"
+                               Margin="0,0,0,16"/>
+
+                    <TextBlock Text="Кличка" Opacity="0.6" Margin="0,0,0,4"
+                               Foreground="{DynamicResource TextBrush}"/>
+                    <TextBox x:Name="NameBox"
+                             Height="32" Margin="0,0,0,12" Padding="8,6"/>
+
+                    <TextBlock Text="Вид" Opacity="0.6" Margin="0,0,0,4"
+                               Foreground="{DynamicResource TextBrush}"/>
+                    <TextBox x:Name="SpeciesBox"
+                             Height="32" Margin="0,0,0,12" Padding="8,6"/>
+
+                    <TextBlock Text="Порода" Opacity="0.6" Margin="0,0,0,4"
+                               Foreground="{DynamicResource TextBrush}"/>
+                    <TextBox x:Name="BreedBox"
+                             Height="32" Margin="0,0,0,12" Padding="8,6"/>
+
+                    <TextBlock Text="Забарвлення" Opacity="0.6" Margin="0,0,0,4"
+                               Foreground="{DynamicResource TextBrush}"/>
+                    <TextBox x:Name="ColoringBox"
+                             Height="32" Margin="0,0,0,12" Padding="8,6"/>
+
+                    <TextBlock Text="Дата народження" Opacity="0.6" Margin="0,0,0,4"
+                               Foreground="{DynamicResource TextBrush}"/>
+                    <DatePicker x:Name="BirthDatePicker"
+                                Height="32" Margin="0,0,0,12"/>
+
+                    <TextBlock Text="Стать" Opacity="0.6" Margin="0,0,0,4"
+                               Foreground="{DynamicResource TextBrush}"/>
+                    <ComboBox x:Name="SexCombo"
+                              Height="32" Margin="0,0,0,12">
+                        <ComboBoxItem Content="Самець"  Tag="0"/>
+                        <ComboBoxItem Content="Самиця"  Tag="1"/>
+                        <ComboBoxItem Content="Невідомо" Tag="2"/>
+                    </ComboBox>
+
+                    <TextBlock Text="Стерилізований" Opacity="0.6" Margin="0,0,0,4"
+                               Foreground="{DynamicResource TextBrush}"/>
+                    <ComboBox x:Name="SterileCombo"
+                              Height="32" Margin="0,0,0,12">
+                        <ComboBoxItem Content="Ні"  Tag="false" IsSelected="True"/>
+                        <ComboBoxItem Content="Так" Tag="true"/>
+                    </ComboBox>
+
+                    <TextBlock Text="Живий" Opacity="0.6" Margin="0,0,0,4"
+                               Foreground="{DynamicResource TextBrush}"/>
+                    <ComboBox x:Name="AliveCombo"
+                              Height="32" Margin="0,0,0,12">
+                        <ComboBoxItem Content="✅ Живий" Tag="true"  IsSelected="True"/>
+                        <ComboBoxItem Content="💀 Помер" Tag="false"/>
+                    </ComboBox>
+
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+    </Grid>
+</Page>

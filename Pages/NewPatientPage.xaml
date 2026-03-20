@@ -1,0 +1,195 @@
+﻿<Page x:Class="CW_hammer.Pages.NewPatientPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Нова картка">
+
+    <Grid Background="{DynamicResource BackgroundBrush}" Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+
+                <!-- ФОТО -->
+                <TextBlock Text="Фото тварини"
+                           FontSize="15" FontWeight="Bold"
+                           Foreground="{DynamicResource TextBrush}"
+                           Margin="0,0,0,8"/>
+                <Border Height="200" Width="200"
+                        HorizontalAlignment="Left"
+                        BorderBrush="{DynamicResource AccentBrush}"
+                        BorderThickness="1" CornerRadius="6"
+                        Margin="0,0,0,8">
+                    <Grid>
+                        <Image x:Name="PhotoPreview"
+                               Stretch="Uniform" Margin="4"/>
+                        <TextBlock x:Name="NoPhotoHint"
+                                   Text="Фото не обрано"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Opacity="0.4"/>
+                    </Grid>
+                </Border>
+                <Button Content="🖼 Обрати фото"
+                        Style="{DynamicResource AppButton}"
+                        HorizontalAlignment="Left"
+                        Margin="0,0,0,20"
+                        Click="ChoosePhoto_Click"/>
+
+                <!-- ДАНІ ТВАРИНИ -->
+                <TextBlock Text="Дані тварини"
+                           FontSize="15" FontWeight="Bold"
+                           Foreground="{DynamicResource TextBrush}"
+                           Margin="0,0,0,12"/>
+
+                <Grid Margin="0,0,0,20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="16"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Кличка -->
+                    <StackPanel Grid.Row="0" Grid.Column="0" Margin="0,0,0,10">
+                        <TextBlock Text="Кличка *" Opacity="0.6" Margin="0,0,0,4"
+                                   Foreground="{DynamicResource TextBrush}"/>
+                        <TextBox x:Name="NameBox" Height="32" Padding="8,6"/>
+                    </StackPanel>
+
+                    <!-- Вид -->
+                    <StackPanel Grid.Row="0" Grid.Column="2" Margin="0,0,0,10">
+                        <TextBlock Text="Вид" Opacity="0.6" Margin="0,0,0,4"
+                                   Foreground="{DynamicResource TextBrush}"/>
+                        <TextBox x:Name="SpeciesBox" Height="32" Padding="8,6"/>
+                    </StackPanel>
+
+                    <!-- Порода -->
+                    <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,0,0,10">
+                        <TextBlock Text="Порода" Opacity="0.6" Margin="0,0,0,4"
+                                   Foreground="{DynamicResource TextBrush}"/>
+                        <TextBox x:Name="BreedBox" Height="32" Padding="8,6"/>
+                    </StackPanel>
+
+                    <!-- Забарвлення -->
+                    <StackPanel Grid.Row="1" Grid.Column="2" Margin="0,0,0,10">
+                        <TextBlock Text="Забарвлення" Opacity="0.6" Margin="0,0,0,4"
+                                   Foreground="{DynamicResource TextBrush}"/>
+                        <TextBox x:Name="ColoringBox" Height="32" Padding="8,6"/>
+                    </StackPanel>
+
+                    <!-- Дата народження -->
+                    <StackPanel Grid.Row="2" Grid.Column="0" Margin="0,0,0,10">
+                        <TextBlock Text="Дата народження" Opacity="0.6" Margin="0,0,0,4"
+                                   Foreground="{DynamicResource TextBrush}"/>
+                        <DatePicker x:Name="BirthDatePicker" Height="32"/>
+                    </StackPanel>
+
+                    <!-- Стать -->
+                    <StackPanel Grid.Row="2" Grid.Column="2" Margin="0,0,0,10">
+                        <TextBlock Text="Стать" Opacity="0.6" Margin="0,0,0,4"
+                                   Foreground="{DynamicResource TextBrush}"/>
+                        <ComboBox x:Name="SexCombo" Height="32">
+                            <ComboBoxItem Content="Самець"   Tag="0" IsSelected="True"/>
+                            <ComboBoxItem Content="Самиця"   Tag="1"/>
+                            <ComboBoxItem Content="Невідомо" Tag="2"/>
+                        </ComboBox>
+                    </StackPanel>
+
+                    <!-- Стерилізація -->
+                    <StackPanel Grid.Row="3" Grid.Column="0" Margin="0,0,0,10">
+                        <TextBlock Text="Стерилізований" Opacity="0.6" Margin="0,0,0,4"
+                                   Foreground="{DynamicResource TextBrush}"/>
+                        <ComboBox x:Name="SterileCombo" Height="32">
+                            <ComboBoxItem Content="Ні"  Tag="false" IsSelected="True"/>
+                            <ComboBoxItem Content="Так" Tag="true"/>
+                        </ComboBox>
+                    </StackPanel>
+                </Grid>
+
+                <!-- ДАНІ ВЛАСНИКА -->
+                <TextBlock Text="Дані власника"
+                           FontSize="15" FontWeight="Bold"
+                           Foreground="{DynamicResource TextBrush}"
+                           Margin="0,0,0,12"/>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="16"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Ім'я -->
+                    <StackPanel Grid.Row="0" Grid.Column="0" Margin="0,0,0,10">
+                        <TextBlock Text="Ім'я *" Opacity="0.6" Margin="0,0,0,4"
+                                   Foreground="{DynamicResource TextBrush}"/>
+                        <TextBox x:Name="OwnerFirstNameBox" Height="32" Padding="8,6"/>
+                    </StackPanel>
+
+                    <!-- Прізвище -->
+                    <StackPanel Grid.Row="0" Grid.Column="2" Margin="0,0,0,10">
+                        <TextBlock Text="Прізвище *" Opacity="0.6" Margin="0,0,0,4"
+                                   Foreground="{DynamicResource TextBrush}"/>
+                        <TextBox x:Name="OwnerLastNameBox" Height="32" Padding="8,6"/>
+                    </StackPanel>
+
+                    <!-- Телефон -->
+                    <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,0,0,10">
+                        <TextBlock Text="Телефон (+380XXXXXXXXX)" Opacity="0.6" Margin="0,0,0,4"
+                                   Foreground="{DynamicResource TextBrush}"/>
+                        <TextBox x:Name="OwnerPhoneBox" Height="32" Padding="8,6"/>
+                    </StackPanel>
+
+                    <!-- Адреса -->
+                    <StackPanel Grid.Row="1" Grid.Column="2" Margin="0,0,0,10">
+                        <TextBlock Text="Адреса" Opacity="0.6" Margin="0,0,0,4"
+                                   Foreground="{DynamicResource TextBrush}"/>
+                        <TextBox x:Name="OwnerAddressBox" Height="32" Padding="8,6"/>
+                    </StackPanel>
+
+                    <!-- Місто -->
+                    <StackPanel Grid.Row="2" Grid.Column="0" Margin="0,0,0,10">
+                        <TextBlock Text="Місто" Opacity="0.6" Margin="0,0,0,4"
+                                   Foreground="{DynamicResource TextBrush}"/>
+                        <TextBox x:Name="OwnerCityBox" Height="32" Padding="8,6"/>
+                    </StackPanel>
+
+                    <!-- Індекс -->
+                    <StackPanel Grid.Row="2" Grid.Column="2" Margin="0,0,0,10">
+                        <TextBlock Text="Індекс (XXXXX)" Opacity="0.6" Margin="0,0,0,4"
+                                   Foreground="{DynamicResource TextBrush}"/>
+                        <TextBox x:Name="OwnerZipBox" Height="32" Padding="8,6"/>
+                    </StackPanel>
+                </Grid>
+
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- КНОПКИ ЗНИЗУ -->
+        <StackPanel Grid.Row="1"
+                    Orientation="Horizontal"
+                    Margin="0,12,0,0">
+            <Button Content="💾 Зберегти"
+                    Style="{DynamicResource AppButton}"
+                    Margin="0,0,8,0"
+                    Click="Save_Click"/>
+            <Button Content="✕ Відмінити"
+                    Style="{DynamicResource AppButton}"
+                    Click="Cancel_Click"/>
+        </StackPanel>
+    </Grid>
+</Page>

@@ -1,0 +1,208 @@
+﻿<Page x:Class="CW_hammer.Pages.PatientsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Список пацієнтів">
+
+    <Grid Background="{DynamicResource BackgroundBrush}" Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- пошук -->
+            <RowDefinition Height="*"/>
+            <!-- таблиця + експлорер -->
+            <RowDefinition Height="Auto"/>
+            <!-- кнопки -->
+        </Grid.RowDefinitions>
+
+        <!-- ═══ ПОШУК Ctrl+F ═══ -->
+        <TextBox x:Name="SearchBox"
+                 Grid.Row="0"
+                 Height="32"
+                 Margin="0,0,0,8"
+                 Padding="8,6"
+                 TextChanged="SearchBox_TextChanged"/>
+
+        <!-- ═══ ОСНОВНИЙ КОНТЕНТ ═══ -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="8"/>
+                <ColumnDefinition Width="300"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- ЛІВО: ТАБЛИЦЯ -->
+            <DataGrid x:Name="PatientsGrid"
+                      Grid.Column="0"
+                      AutoGenerateColumns="False"
+                      IsReadOnly="True"
+                      SelectionMode="Single"
+                      Background="{DynamicResource SurfaceBrush}"
+                      BorderBrush="{DynamicResource AccentBrush}"
+                      BorderThickness="1"
+                      RowBackground="Transparent"
+                      AlternatingRowBackground="#F2F2F2"
+                      GridLinesVisibility="Horizontal"
+                      MouseMove="PatientsGrid_MouseMove"
+                      MouseLeftButtonUp="PatientsGrid_Click">
+
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="📄 Мед картка" Click="CtxMedCard_Click"/>
+                        <Separator/>
+                        <MenuItem Header="✏️ Редагувати" Click="CtxEdit_Click"/>
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Власник"
+                                        Binding="{Binding OwnerFullName}"
+                                        Width="160"/>
+                    <DataGridTextColumn Header="Кличка"
+                                        Binding="{Binding Name}"
+                                        Width="100"/>
+                    <DataGridTextColumn Header="Вид"
+                                        Binding="{Binding Species}"
+                                        Width="80"/>
+                    <DataGridTextColumn Header="Стан"
+                                        Binding="{Binding StatusText}"
+                                        Width="120"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <!-- РОЗДІЛЬНИК -->
+            <Border Grid.Column="1"
+                    Background="{DynamicResource AccentBrush}"
+                    Opacity="0.25"/>
+
+            <!-- ПРАВО: ЕКСПЛОРЕР -->
+            <Border Grid.Column="2"
+                    Background="{DynamicResource SurfaceBrush}"
+                    BorderBrush="{DynamicResource AccentBrush}"
+                    BorderThickness="1" CornerRadius="6">
+
+                <StackPanel x:Name="ExplorerPanel" Margin="10">
+
+                    <TextBlock x:Name="ExplorerHint"
+                               Text="Оберіть пацієнта"
+                               HorizontalAlignment="Center"
+                               Opacity="0.4" FontSize="13"
+                               Margin="0,80,0,0"/>
+
+                    <StackPanel x:Name="ExplorerContent"
+                                Visibility="Collapsed">
+
+                        <!-- ФОТО -->
+                        <Border Height="180"
+                                BorderBrush="{DynamicResource AccentBrush}"
+                                BorderThickness="1" CornerRadius="6"
+                                Margin="0,0,0,8">
+                            <Grid>
+                                <Image x:Name="ExplorerPhoto"
+                                       Stretch="Uniform" Margin="4"/>
+                                <TextBlock x:Name="ExplorerNoPhoto"
+                                           Text="Фото відсутнє"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           Opacity="0.4" FontSize="12"/>
+                            </Grid>
+                        </Border>
+
+                        <!-- ДАНІ -->
+                        <Border Background="{DynamicResource BackgroundBrush}"
+                                BorderBrush="{DynamicResource AccentBrush}"
+                                BorderThickness="1" CornerRadius="4"
+                                Padding="8" Margin="0,0,0,8">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Grid.Row="0" Grid.Column="0"
+                                           Text="Телефон:" Opacity="0.6"
+                                           Margin="0,3,8,3"
+                                           Foreground="{DynamicResource TextBrush}"/>
+                                <TextBlock Grid.Row="1" Grid.Column="0"
+                                           Text="Адреса:" Opacity="0.6"
+                                           Margin="0,3,8,3"
+                                           Foreground="{DynamicResource TextBrush}"/>
+                                <TextBlock Grid.Row="2" Grid.Column="0"
+                                           Text="Вік:" Opacity="0.6"
+                                           Margin="0,3,8,3"
+                                           Foreground="{DynamicResource TextBrush}"/>
+                                <TextBlock Grid.Row="3" Grid.Column="0"
+                                           Text="Стать:" Opacity="0.6"
+                                           Margin="0,3,8,3"
+                                           Foreground="{DynamicResource TextBrush}"/>
+                                <TextBlock Grid.Row="4" Grid.Column="0"
+                                           Text="Порода:" Opacity="0.6"
+                                           Margin="0,3,8,3"
+                                           Foreground="{DynamicResource TextBrush}"/>
+
+                                <TextBlock x:Name="EPhone"
+                                           Grid.Row="0" Grid.Column="1"
+                                           Margin="0,3" TextWrapping="Wrap"
+                                           Foreground="{DynamicResource TextBrush}"/>
+                                <TextBlock x:Name="EAddress"
+                                           Grid.Row="1" Grid.Column="1"
+                                           Margin="0,3" TextWrapping="Wrap"
+                                           Foreground="{DynamicResource TextBrush}"/>
+                                <TextBlock x:Name="EAge"
+                                           Grid.Row="2" Grid.Column="1"
+                                           Margin="0,3"
+                                           Foreground="{DynamicResource TextBrush}"/>
+                                <TextBlock x:Name="ESex"
+                                           Grid.Row="3" Grid.Column="1"
+                                           Margin="0,3"
+                                           Foreground="{DynamicResource TextBrush}"/>
+                                <TextBlock x:Name="EBreed"
+                                           Grid.Row="4" Grid.Column="1"
+                                           Margin="0,3"
+                                           Foreground="{DynamicResource TextBrush}"/>
+                            </Grid>
+                        </Border>
+
+                        <!-- КНОПКИ ЕКСПЛОРЕРА -->
+                        <Button Content="📋 Мед картка"
+                                Style="{DynamicResource AppButton}"
+                                Margin="0,0,0,4"
+                                Click="MedCard_Click"/>
+
+                        <Button Content="✏️ Редагувати"
+                                Style="{DynamicResource AppButton}"
+                                Margin="0,0,0,4"
+                                Click="CtxEdit_Click"/>
+
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <!-- ═══ НИЗ: КНОПКИ ═══ -->
+        <StackPanel Grid.Row="2"
+                    Orientation="Horizontal"
+                    Margin="0,8,0,0">
+
+            <Button Content="➕ Нова картка"
+                    Style="{DynamicResource AppButton}"
+                    Margin="0,0,8,0"
+                    Click="NewPatient_Click"/>
+
+            <Button Content="🏥 Додати курс лікування"
+                    Style="{DynamicResource AppButton}"
+                    Margin="0,0,8,0"
+                    Click="AddTreatment_Click"/>
+
+            <Button Content="🔍 Огляд"
+                    Style="{DynamicResource AppButton}"
+                    Click="AddExam_Click"/>
+
+        </StackPanel>
+    </Grid>
+</Page>

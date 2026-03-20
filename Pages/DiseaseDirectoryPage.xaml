@@ -1,0 +1,110 @@
+﻿<Page x:Class="CW_hammer.Pages.DiseaseDirectoryPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Довідник хвороб">
+
+    <Grid Background="{DynamicResource BackgroundBrush}" Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- ТАБЛИЦЯ -->
+        <Border Grid.Row="0"
+                BorderBrush="{DynamicResource AccentBrush}"
+                BorderThickness="1" CornerRadius="6"
+                Background="{DynamicResource SurfaceBrush}">
+            <StackPanel>
+                <TextBlock Text="📋 Довідник хвороб"
+                           FontSize="15" FontWeight="Bold"
+                           Margin="10,8"
+                           Foreground="{DynamicResource TextBrush}"/>
+
+                <DataGrid x:Name="DiseaseGrid"
+                          AutoGenerateColumns="False"
+                          IsReadOnly="True"
+                          HeadersVisibility="Column"
+                          GridLinesVisibility="Horizontal"
+                          Background="Transparent"
+                          BorderThickness="0">
+
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="✏️ Редагувати" Click="EditDisease_Click"/>
+                            <Separator/>
+                            <MenuItem Header="🗑 Видалити"   Click="DeleteDisease_Click"/>
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID"
+                                            Binding="{Binding ID}"
+                                            Visibility="Collapsed"/>
+                        <DataGridTextColumn Header="Назва"
+                                            Binding="{Binding Name}"     Width="200"/>
+                        <DataGridTextColumn Header="Категорія"
+                                            Binding="{Binding Category}" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </Border>
+
+        <!-- ФОРМА ДОДАВАННЯ / РЕДАГУВАННЯ -->
+        <Border Grid.Row="1"
+                BorderBrush="{DynamicResource AccentBrush}"
+                BorderThickness="1" CornerRadius="6"
+                Background="{DynamicResource SurfaceBrush}"
+                Padding="12" Margin="0,8,0,0">
+            <StackPanel>
+                <TextBlock x:Name="FormTitle"
+                           Text="➕ Додати хворобу"
+                           FontWeight="Bold" Margin="0,0,0,10"
+                           Foreground="{DynamicResource TextBrush}"/>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="16"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="16"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox x:Name="NameBox"
+                             Grid.Column="0"
+                             Height="32" Padding="8,6"/>
+
+                    <TextBox x:Name="CategoryBox"
+                             Grid.Column="2"
+                             Height="32" Padding="8,6"/>
+
+                    <Button Grid.Column="4"
+                            Content="💾 Зберегти"
+                            Style="{DynamicResource AppButton}"
+                            Click="SaveDisease_Click"/>
+
+                    <Button Grid.Column="6"
+                            Content="✕"
+                            Style="{DynamicResource AppButton}"
+                            Click="CancelEdit_Click"/>
+                </Grid>
+
+                <Grid Margin="0,4,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="16"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Назва хвороби"
+                               Opacity="0.5" FontSize="11"
+                               Foreground="{DynamicResource TextBrush}"/>
+                    <TextBlock Grid.Column="2" Text="Категорія (напр. Інфекційна)"
+                               Opacity="0.5" FontSize="11"
+                               Foreground="{DynamicResource TextBrush}"/>
+                </Grid>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Page>
